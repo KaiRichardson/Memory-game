@@ -15,7 +15,7 @@ const dbRoute =
   "mongodb://user:password1@ds247637.mlab.com:47637/heroku_l274z5fq";
 
 // connects our back end code with the database
-mongoose.connect(process.env.MONGODB_URI || dbRoute, { useNewUrlParser: true });
+mongoose.connect(dbRoute, { useNewUrlParser: true });
 
 let db = mongoose.connection;
 
@@ -24,6 +24,7 @@ db.once("open", () => console.log("connected to the database"));
 // checks if connection with the database is successful
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
+// (optional) only made for logging and
 // bodyParser, parses the request body to be a readable json format
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
