@@ -1,0 +1,24 @@
+{
+  "name": "Memory-game",
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"cd backend && node server.js\" \"cd client && npm start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KaiRichardson/Memory-game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KaiRichardson/Memory-game/issues"
+  },
+  "homepage": "https://memory-game1.herokuapp.com/",
+  "dependencies": {
+    "concurrently": "^4.1.1"
+  }
+}
