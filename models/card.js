@@ -7,6 +7,6 @@ const cardSchema = new Schema({
   clicked: { type: Boolean, default: false }
 });
 
-const Book = mongoose.model("Card", cardSchema);
+const Card = mongoose.model("Card", cardSchema);
 
-module.exports = Book;
+module.exports = Card;

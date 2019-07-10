@@ -11,7 +11,6 @@ function App() {
         <Nav />
         <Switch>
           <Route exact path="/" component={Game} />
-          <Route exact path="/game" component={Game} />
           <Route component={NoMatch} />
         </Switch>
       </div>

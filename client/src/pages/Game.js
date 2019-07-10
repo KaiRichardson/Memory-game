@@ -33,53 +33,11 @@ class Cards extends Component {
             <Jumbotron>
               <h1>What Cards Should I Read?</h1>
             </Jumbotron>
-            <form>
-              <Input
-                value={this.state.title}
-                onChange={this.handleInputChange}
-                name="title"
-                placeholder="Title (required)"
-              />
-              <Input
-                value={this.state.author}
-                onChange={this.handleInputChange}
-                name="author"
-                placeholder="Author (required)"
-              />
-              <TextArea
-                value={this.state.synopsis}
-                onChange={this.handleInputChange}
-                name="synopsis"
-                placeholder="Synopsis (Optional)"
-              />
-              <FormBtn
-                disabled={!(this.state.author && this.state.title)}
-                onClick={this.handleFormSubmit}
-              >
-                Submit Card
-              </FormBtn>
-            </form>
           </Col>
           <Col size="md-6 sm-12">
             <Jumbotron>
               <h1>Cards On My List</h1>
             </Jumbotron>
-            {this.state.cards.length ? (
-              <List>
-                {this.state.cards.map(card => (
-                  <ListItem key={card._id}>
-                    <Link to={"/cards/" + card._id}>
-                      <strong>
-                        {card.title} by {card.author}
-                      </strong>
-                    </Link>
-                    <DeleteBtn onClick={() => this.deleteCard(card._id)} />
-                  </ListItem>
-                ))}
-              </List>
-            ) : (
-              <h3>No Results to Display</h3>
-            )}
           </Col>
         </Row>
       </Container>
