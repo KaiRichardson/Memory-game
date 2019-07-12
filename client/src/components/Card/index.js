@@ -1,17 +1,10 @@
 import React from "react";
 import "./style.css";
 
-export function Card(props) {
-  return (
-    <div
-      className="card"
-      style={{
-        backgroundImage: props.image ? `url(${props.image})` : "none"
-      }}
-    >
-      {!props.image && <i className="fa fa-spinner fa-spin" aria-hidden="true" />}
-    </div>
-  );
-}
+const Card = props => (
+  <div className="click-item" onClick={props.imageClick}>
+    <img alt={props.name} src={props.image} />
+  </div>
+);
 
 export default Card;

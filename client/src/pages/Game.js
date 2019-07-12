@@ -1,15 +1,17 @@
 import React, { Component } from "react";
-import Jumbotron from "../components/Jumbotron";
+import Main from "../components/Main";
 import API from "../utils/API";
-import { Col, Row, Container } from "../components/Grid";
-import { Card, CardItem } from "../components/Card";
+import Card from "../components/Card";
+
+import Nav from "../components/Nav";
+import Header from "../components/Header";
 
 class Cards extends Component {
   state = {
     cards: [],
-    title: "",
-    picture: "",
-    clicked: false
+    score: 0,
+    highscore: 0,
+    guess: "Click an image to begin!"
   };
 
   componentDidMount() {
@@ -18,60 +20,72 @@ class Cards extends Component {
 
   loadCards = () => {
     API.getCards()
-      .then(res =>
-        this.setState({
-          cards: res.data,
-          title: "",
-          picture: "",
-          clicked: false
-        })
-      )
+      .then(res => this.setState({ cards: res.data }))
       .catch(err => console.log(err));
+    console.log("imhere");
+
+    // console.log(state.cards);
   };
 
-  // handleCardClick = event => {
-  //   // Get the data-value of the clicked button
-  //   const btnType = event.target.attributes.getNamedItem("data-value").value;
+  imageClick = id => {
+    this.state.cards.find((o, i) => {
+      if (o.id === id) {
+        if (!cards[i].clicked) {
+          cards[i].count = cards[i].count + 1;
 
-  //   if (btnType === "pick") {
-  //     // Set newState.match to either true or false depending on whether or not the dog likes us (1/5 chance)
-  //     newState.match = 1 === Math.floor(Math.random() * 5) + 1;
+          this.setState({ score: this.state.score + 1 }, function() {
+            console.log(this.state.score);
+          });
 
-  //     // Set newState.matchCount equal to its current value or its current value + 1 depending on whether the dog likes us
-  //     newState.matchCount = newState.match
-  //       ? newState.matchCount + 1
-  //       : newState.matchCount;
-  //   } else {
-  //     // If we thumbs down'ed the dog, we haven't matched with it
-  //     newState.match = false;
-  //   }
-  //   // Replace our component's state with newState, load the next dog image
-  // };
+          this.state.cards.sort(() => Math.random() - 0.5);
+          return true;
+        } else {
+          this.gameOver();
+        }
+      }
+    });
+  };
 
+  gameOver = () => {
+    if (this.state.score > this.state.highscore) {
+      this.setState({ highscore: this.state.score }, function() {
+        console.log(this.state.highscore);
+      });
+    }
+
+    this.state.cards.forEach(card => {
+      card.count = 0;
+    });
+
+    alert(`Game Over :( \nscore: ${this.state.score}`);
+
+    this.setState({ score: 0 });
+    
+    return true;
+  };
+
+  // Map over this.state.cards and render a cardCard component for each card object
   render() {
     return (
-      <Container fluid>
-        <Row>
-          <Col size="md-12">
-            <Jumbotron>
-              <h1>Clicky Game!</h1>
-              <h3>
-                Click on an image to earn points, but don't click on any more
-                than once!
-              </h3>
-            </Jumbotron>
-          </Col>
-          <Col size="md-12">
-            <Jumbotron>
-                {this.state.cards.map(card => (
-                  <Card key={card._id}>
-                    <a href={"/cards/" + card._id} />
-                  </Card>
-                ))}
-            </Jumbotron>
-          </Col>
-        </Row>
-      </Container>
+      <div>
+        <Nav
+          guess={this.state.guess}
+          score={this.state.score}
+          topScore={this.state.highscore}
+        />
+        <Header />
+        <Main>
+          {this.state.cards.map(card => (
+            <Card
+              imageClick={this.imageClick}
+              id={card.id}
+              key={card.id}
+              alt={card.name}
+              image={card.image}
+            />
+          ))}
+        </Main>
+      </div>
     );
   }
 }

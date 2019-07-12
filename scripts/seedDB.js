@@ -5,74 +5,74 @@ const db = require("../models");
 
 mongoose.connect(
   process.env.MONGODB_URI ||
-  "mongodb://localhost/clickygame"
+    "mongodb://user:password1@ds247637.mlab.com:47637/heroku_l274z5fq",
+  { useNewUrlParser: true }
 );
 
 const cardSeed = [
   {
-    title: "apple",
-    picture: "./fruit/apple.gif",
+    name: "apple",
+    image: "./fruit/apple.gif",
     clicked: false
   },
   {
-    title: "banana",
-    picture: "./fruit/banana.gif",
+    name: "banana",
+    image: "./fruit/banana.gif",
     clicked: false
   },
   {
-    title: "blackcurrant",
-    picture: "./fruit/blackcurrant.gif",
+    name: "blackcurrant",
+    image: "./fruit/blackcurrant.gif",
     clicked: false
   },
   {
-    title: "cantaloupe",
-    picture: "./fruit/cantaloupe.gif",
+    name: "cantaloupe",
+    image: "./fruit/cantaloupe.gif",
     clicked: false
   },
   {
-    title: "durian",
-    picture: "./fruit/durian.gif",
+    name: "durian",
+    image: "./fruit/durian.gif",
     clicked: false
   },
   {
-    title: "fig",
-    picture: "./fruit/fig.gif",
+    name: "fig",
+    image: "./fruit/fig.gif",
     clicked: false
   },
   {
-    title: "grapefruit",
-    picture: "./fruit/grapefruit.gif",
+    name: "grapefruit",
+    image: "./fruit/grapefruit.gif",
     clicked: false
   },
   {
-    title: "lemon",
-    picture: "./fruit/lemon.gif",
+    name: "lemon",
+    image: "./fruit/lemon.gif",
     clicked: false
   },
   {
-    title: "longan",
-    picture: "./fruit/longan.gif",
+    name: "longan",
+    image: "./fruit/longan.gif",
     clicked: false
   },
   {
-    title: "mango",
-    picture: "./fruit/mango.gif",
+    name: "mango",
+    image: "./fruit/mango.gif",
     clicked: false
   },
   {
-    title: "mangosteen",
-    picture: "./fruit/mangosteen.gif",
+    name: "mangosteen",
+    image: "./fruit/mangosteen.gif",
     clicked: false
   },
   {
-    title: "plum",
-    picture: "./fruit/plum.gif",
+    name: "plum",
+    image: "./fruit/plum.gif",
     clicked: false
   }
 ];
 
-db.Card
-  .remove({})
+db.Card.deleteMany({})
   .then(() => db.Card.collection.insertMany(cardSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
