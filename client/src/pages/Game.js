@@ -6,12 +6,14 @@ import Card from "../components/Card";
 import Nav from "../components/Nav";
 import Header from "../components/Header";
 
+let highscore = 0;
+
 class Cards extends Component {
   state = {
     cards: [],
     score: 0,
-    highscore: 0,
-    guess: "Click an image to begin!"
+    highscore: highscore,
+    status: "Click an image to begin!"
   };
 
   componentDidMount() {
@@ -22,46 +24,38 @@ class Cards extends Component {
     API.getCards()
       .then(res => this.setState({ cards: res.data }))
       .catch(err => console.log(err));
-    console.log("imhere");
 
     // console.log(state.cards);
   };
 
+  //shuffle the fruit cards in the browser when clicked
   imageClick = id => {
-    this.state.cards.find((o, i) => {
-      if (o.id === id) {
-        if (!cards[i].clicked) {
-          cards[i].count = cards[i].count + 1;
+    let clickedIds = this.state.cards;
+    let Index = clickedIds.indexOf(id);
 
-          this.setState({ score: this.state.score + 1 }, function() {
-            console.log(this.state.score);
-          });
-
-          this.state.cards.sort(() => Math.random() - 0.5);
-          return true;
-        } else {
-          this.gameOver();
-        }
-      }
-    });
-  };
-
-  gameOver = () => {
-    if (this.state.score > this.state.highscore) {
-      this.setState({ highscore: this.state.score }, function() {
-        console.log(this.state.highscore);
+    if (id.clicked) {
+      this.setState({
+        highscore: highscore,
+        score: 0,
+        status: "You guessed incorrectly!"
       });
+
+      this.loadCards();
+    } else {
+      clickedIds[Index].clicked = true;
+      highscore++;
+
+      this.setState({
+        highscore: highscore,
+        score: this.state.score + 1,
+        status: "You guessed correctly!"
+      });
+
+      for (let i = clickedIds.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [clickedIds[i], clickedIds[j]] = [clickedIds[j], clickedIds[i]];
+      }
     }
-
-    this.state.cards.forEach(card => {
-      card.count = 0;
-    });
-
-    alert(`Game Over :( \nscore: ${this.state.score}`);
-
-    this.setState({ score: 0 });
-    
-    return true;
   };
 
   // Map over this.state.cards and render a cardCard component for each card object
@@ -69,7 +63,7 @@ class Cards extends Component {
     return (
       <div>
         <Nav
-          guess={this.state.guess}
+          status={this.state.status}
           score={this.state.score}
           topScore={this.state.highscore}
         />
@@ -77,10 +71,9 @@ class Cards extends Component {
         <Main>
           {this.state.cards.map(card => (
             <Card
-              imageClick={this.imageClick}
-              id={card.id}
-              key={card.id}
-              alt={card.name}
+              onClick={() => this.imageClick(card)}
+              key={card._id}
+              name={card.name}
               image={card.image}
             />
           ))}

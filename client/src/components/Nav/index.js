@@ -8,7 +8,7 @@ function Nav(props) {
         <li className="brand">
           <a href="/">Clicky Game</a>
         </li>
-        <li className="">{`${props.guess}`}</li>
+        <li className="">{`${props.status}`}</li>
         <li>{`Score: ${props.score} | Top Score: ${props.topScore}`}</li>
       </ul>
     </nav>

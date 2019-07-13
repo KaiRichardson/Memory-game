@@ -1,5 +1,13 @@
 .main {
+  padding-top: 10px;
+  margin: 20px;
   height: 100%;
-  margin: 0;
-  padding: 0;
+  width: 1000px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  overflow: auto;
+  margin-left: auto;
+  margin-right: auto;
+  /* position:absolute; */
 }
