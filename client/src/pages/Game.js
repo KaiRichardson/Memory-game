@@ -1,64 +1,62 @@
 import React, { Component } from "react";
-import Main from "../components/Main";
 import API from "../utils/API";
-import Card from "../components/Card";
 
 import Nav from "../components/Nav";
 import Header from "../components/Header";
-
-let highscore = 0;
+import Main from "../components/Main";
+import Card from "../components/Card";
 
 class Cards extends Component {
+  //sets state to 0 or empty
   state = {
     cards: [],
     score: 0,
-    highscore: highscore,
+    highscore: 0,
     status: "Click an image to begin!"
   };
-
+  // run load funct on componante load
   componentDidMount() {
     this.loadCards();
   }
-
+  // load cards into state
   loadCards = () => {
     API.getCards()
       .then(res => this.setState({ cards: res.data }))
       .catch(err => console.log(err));
-
-    // console.log(state.cards);
   };
 
   //shuffle the fruit cards in the browser when clicked
   imageClick = id => {
-    let clickedIds = this.state.cards;
-    let Index = clickedIds.indexOf(id);
+    let cardObj = this.state.cards;
+    let Index = cardObj.indexOf(id);
+    let scoreUp = this.state.score + 1;
+    let highscore = this.state.highscore;
 
     if (id.clicked) {
+      // if los set back to 0 and load fresh cards into state
       this.setState({
-        highscore: highscore,
         score: 0,
         status: "You guessed incorrectly!"
       });
-
       this.loadCards();
     } else {
-      clickedIds[Index].clicked = true;
-      highscore++;
-
+      // if win incriment both score and highscore
+      cardObj[Index].clicked = true;
       this.setState({
-        highscore: highscore,
-        score: this.state.score + 1,
+        score: scoreUp,
+        highscore:
+          scoreUp > highscore ? (highscore = scoreUp) : (highscore = highscore),
         status: "You guessed correctly!"
       });
 
-      for (let i = clickedIds.length - 1; i > 0; i--) {
+      // randomize cards on click
+      for (let i = cardObj.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
-        [clickedIds[i], clickedIds[j]] = [clickedIds[j], clickedIds[i]];
+        [cardObj[i], cardObj[j]] = [cardObj[j], cardObj[i]];
       }
     }
   };
 
-  // Map over this.state.cards and render a cardCard component for each card object
   render() {
     return (
       <div>
@@ -69,6 +67,7 @@ class Cards extends Component {
         />
         <Header />
         <Main>
+          {/* Map over this.state.cards and render a card component for each card object */}
           {this.state.cards.map(card => (
             <Card
               onClick={() => this.imageClick(card)}
