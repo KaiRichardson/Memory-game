@@ -4,7 +4,9 @@ import "./style.css";
 function Footer() {
   return (
     <footer className="footer">
-      <span>Clicky Game 2019</span>
+      <span>
+        Memory Game (2019) | By Kai Richardson | <a href="https://github.com/KaiRichardson/Memory-game">GitHub</a>
+      </span>
     </footer>
   );
 }

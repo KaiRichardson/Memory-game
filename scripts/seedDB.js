@@ -12,62 +12,62 @@ mongoose.connect(
 const cardSeed = [
   {
     name: "apple",
-    image: "./fruit/apple.gif",
+    image: "./assets/images/fruit/apple.gif",
     clicked: false
   },
   {
     name: "banana",
-    image: "./fruit/banana.gif",
+    image: "./assets/images/fruit/banana.gif",
     clicked: false
   },
   {
     name: "blackcurrant",
-    image: "./fruit/blackcurrant.gif",
+    image: "./assets/images/fruit/blackcurrant.gif",
     clicked: false
   },
   {
     name: "cantaloupe",
-    image: "./fruit/cantaloupe.gif",
+    image: "./assets/images/fruit/cantaloupe.gif",
     clicked: false
   },
   {
     name: "durian",
-    image: "./fruit/durian.gif",
+    image: "./assets/images/fruit/durian.gif",
     clicked: false
   },
   {
     name: "fig",
-    image: "./fruit/fig.gif",
+    image: "./assets/images/fruit/fig.gif",
     clicked: false
   },
   {
     name: "grapefruit",
-    image: "./fruit/grapefruit.gif",
+    image: "./assets/images/fruit/grapefruit.gif",
     clicked: false
   },
   {
     name: "lemon",
-    image: "./fruit/lemon.gif",
+    image: "./assets/images/fruit/lemon.gif",
     clicked: false
   },
   {
     name: "longan",
-    image: "./fruit/longan.gif",
+    image: "./assets/images/fruit/longan.gif",
     clicked: false
   },
   {
     name: "mango",
-    image: "./fruit/mango.gif",
+    image: "./assets/images/fruit/mango.gif",
     clicked: false
   },
   {
     name: "mangosteen",
-    image: "./fruit/mangosteen.gif",
+    image: "./assets/images/fruit/mangosteen.gif",
     clicked: false
   },
   {
     name: "plum",
-    image: "./fruit/plum.gif",
+    image: "./assets/images/fruit/plum.gif",
     clicked: false
   }
 ];
