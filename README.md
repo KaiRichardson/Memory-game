@@ -10,19 +10,17 @@ This is a memory game using the MERN stack. The application's UI is split into f
 * Cards in Main
 * Footer
 
-## Instructions
+## How It Works
 
-1. Create a new React application using Create React App.
-
-2. The app should render 12 different images (of your choice) to the screen. Each image should listen for click events.
+1. The app renders 12 different images of fruit to the screen. Each image listens for click events.
 
 ![Fruit Memory Game](./client/public/assets/images/clicky_pic.jpg)
 
-3. The app should keep track of the user's score. The user's score should be incremented when clicking an image for the first time. The user's score should be reset to 0 if they click the same image more than once.
+2. The app then keeps track of the user's score. The user's score is incremented when clicking an a fruit for the first time. The user's score is reset to 0 if they click the same fruit more than once.
 
-4. Every time an image is clicked, the images rendered to the page should shuffle themselves in a random order.
+4. Every time an image is clicked, the images rendered to the page shuffle themselves in a random order.
 
-5. Once the user's score is reset after an incorrect guess, the game should restart.
+5. Once the user's score is reset after an incorrect guess, the game restarts while keeping the highscore. highscore is reset after page refresh. 
 
 ## Technologies used
 
